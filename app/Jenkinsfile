@@ -1,0 +1,4 @@
+node {
+   stage 'test'
+   sh 'ls -ltr'
+}
