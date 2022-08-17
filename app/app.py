@@ -16,7 +16,7 @@ def get_100_jokes():
         for joke_line in joke:
             resp[count] = joke_line
             count+=1
-            if count == 5: 
+            if count == 100: 
                 break
     return json.dumps(resp)
 

@@ -61,7 +61,7 @@
 
         - name: Create Docker Jenkins Container
           docker_container:
-            name: "{{ container_name }}"
+            name: jenkins
             image: jenkins-docker
             ports:
             - "8080:8080"
@@ -69,4 +69,12 @@
             volumes:
             - "/var/jenkins_home:/var/jenkins_home"
             - "/var/run/docker.sock:/var/run/docker.sock"
+            env:
+              GITHUB_REPO: "{{ lookup('env','GITHUB_REPO') }}"
+              GITHUB_USERNAME:  "{{ lookup('env','GITHUB_USERNAME') }}"
+              GITHUB_PASSWORD: "{{ lookup('env','GITHUB_PASSWORD') }}"
+              JENKINS_USER: "{{ lookup('env','JENKINS_USER') }}"
+              JENKINS_PASSWORD:  "{{ lookup('env','JENKINS_PASSWORD') }}"
+              JENKINS_HOSTNAME:  "{{ lookup('env','JENKINS_HOSTNAME') }}"
             state: started
+            

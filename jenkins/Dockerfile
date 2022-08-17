@@ -6,3 +6,6 @@ COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
 
 COPY casc.yaml /var/jenkins_home/casc.yaml
+
+RUN curl https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall
+RUN chmod 666 /var/run/docker.sock

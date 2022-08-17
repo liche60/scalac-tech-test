@@ -1,5 +1,14 @@
 node {
-   checkout scm
-   stage 'build'
-   sh ''
+    stage 'checkout'
+        git url: 'https://github.com/liche60/scalac-tech-test'
+        sh 'git clean -fdx; sleep 4;'
+    stage 'build'
+        sh '''
+            cd app/
+            docker build -t jokes_docker .
+        '''
+    stage 'deploy'
+        sh 'docker rm --force jokes; sleep 5'
+        sh 'docker run --name jokes -p 5000:5000 -d jokes_docker'
+        sh 'rm -Rf *'
 }
