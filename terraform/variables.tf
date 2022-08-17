@@ -36,3 +36,19 @@ variable "ssh_key_private" {
   description = "SSH private key file"
   type        = string
 }
+
+variable "jenkins_user" {
+  type        = string
+}
+variable "jenkins_password" {
+  type        = string
+}
+variable "github_user" {
+  type        = string
+}
+variable "github_password" {
+  type        = string
+}
+variable "github_repo" {
+  type        = string
+}

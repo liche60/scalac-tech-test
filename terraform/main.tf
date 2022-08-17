@@ -49,11 +49,16 @@ resource "aws_instance" "app_server" {
     source      = "../jenkins"
     destination = "/home/ec2-user/jenkins"
   }
-
   provisioner "remote-exec" {
     inline = [
       "sudo apt -y update && sudo apt install python3-pip -y",
       "sudo pip3 install ansible",
+      "export GITHUB_REPO=${var.github_repo}",
+      "export GITHUB_USERNAME=${var.github_user}",
+      "export GITHUB_PASSWORD=${var.github_password}",
+      "export JENKINS_USER=${var.jenkins_user}",
+      "export JENKINS_PASSWORD=${var.jenkins_password}",
+      "export JENKINS_HOSTNAME=$(dig +short myip.opendns.com @resolver1.opendns.com)",
       "ansible-playbook -i localhost /home/ec2-user/ansible/playbook.yaml"
       ]
   }
