@@ -1,4 +1,5 @@
 node {
-   stage 'test'
-   sh 'ls -ltr'
+   checkout scm
+   stage 'build'
+   sh ''
 }
