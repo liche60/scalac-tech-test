@@ -1,0 +1,28 @@
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: admin
+          password: admin
+unclassified:
+  location:
+    url: http://35.180.250.232:8080/
+jobs:
+  - script: >
+        pipelineJob("Jokes-Pipelines") {
+        definition {
+            cpsScm {
+                lightweight(true)
+                scriptPath "app/jenkinsfile"
+                scm {
+                    git{
+                      remote {
+                        url("https://github.com/liche60/scalac-tech-test.git")
+                      }
+                      branch("refs/heads/master")
+                    }
+                }
+            }
+          }
+        }
